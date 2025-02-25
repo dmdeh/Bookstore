@@ -1,5 +1,9 @@
-import styles from "./page.module.css";
+import BookList from "@/components/BookList";
 
 export default function Home() {
-  return <div></div>;
+  return (
+    <div>
+      <BookList />
+    </div>
+  );
 }

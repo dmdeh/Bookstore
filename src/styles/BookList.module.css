@@ -1,0 +1,91 @@
+.container {
+  width: 100%;
+  max-width: 900px;
+  margin: 30px auto;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 30px;
+  font-size: 20px;
+  color: #666;
+}
+
+.table {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.headerRow {
+  display: contents;
+  font-weight: bold;
+  background: #f4f4f4;
+}
+
+.row {
+  display: contents;
+}
+
+.headerCell,
+.cell,
+.buttonCell {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  align-content: center;
+}
+
+.headerCell {
+  background: #f4f4f4;
+  font-weight: bold;
+}
+
+.cell {
+  height: 60px;
+}
+
+.buttonCell {
+  display: flex;
+  gap: 2px;
+}
+
+.bookTitle {
+  font-weight: 500;
+  color: #2563eb;
+  text-decoration: none;
+  display: inline-block;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid transparent;
+  width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.quantity {
+  padding: 5px 10px;
+  border-radius: 4px;
+  background: #e1f5fe;
+  color: #0070f3;
+  font-weight: bold;
+}
+
+.editButton {
+  padding: 5px 10px;
+  border: none;
+  background: #0070f3;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.deleteButton {
+  padding: 5px 10px;
+  border: none;
+  background: #d32f2f;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
