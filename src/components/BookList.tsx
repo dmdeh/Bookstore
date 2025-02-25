@@ -1,3 +1,5 @@
+"use server";
+
 import { fetchBooks } from "@/lib/data";
 import styles from "@/styles/BookList.module.css";
 import { BookType } from "@/types/type";
