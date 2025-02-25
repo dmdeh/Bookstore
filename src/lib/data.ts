@@ -1,6 +1,7 @@
 export async function fetchBooks() {
   try {
-    const res = await fetch(`${process.env.BASE_URL}/api/book`);
+    const baseUrl = process.env.BASE_URL || "";
+    const res = await fetch(`${baseUrl}/api/book`);
 
     if (!res.ok) {
       throw new Error("책 정보를 가져오는데 실패했습니다");
