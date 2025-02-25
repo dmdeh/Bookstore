@@ -3,6 +3,7 @@
 }
 
 .cell,
+.quantityCell,
 .buttonCell {
   padding: 12px;
   border-bottom: 1px solid #ddd;
@@ -14,8 +15,19 @@
   font-weight: bold;
 }
 
+.quantityCell {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 .cell {
   height: 60px;
+}
+
+.editQuantity {
+  display: flex;
+  flex-direction: column;
 }
 
 .buttonCell {
@@ -37,11 +49,13 @@
 }
 
 .quantity {
-  padding: 5px 10px;
+  min-width: 40px;
+  padding: 8px 11px;
   border-radius: 4px;
   background: #e1f5fe;
   color: #0070f3;
   font-weight: bold;
+  text-align: right;
 }
 
 .editButton {

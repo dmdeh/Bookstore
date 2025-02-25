@@ -1,7 +1,7 @@
 import { BookType } from "@/types/type";
 import styles from "@/styles/Book.module.css";
 import Link from "next/link";
-import { Pencil, Trash2 } from "lucide-react";
+import { ChevronUp, ChevronDown, Pencil, Trash2 } from "lucide-react";
 
 interface BookProps {
   book: BookType;
@@ -19,8 +19,12 @@ export default function Book({ book }: BookProps) {
       </div>
       <div className={styles.cell}>{author}</div>
       <div className={styles.cell}>{publisher}</div>
-      <div className={styles.cell}>
+      <div className={styles.quantityCell}>
         <span className={styles.quantity}>{quantity}</span>
+        <div className={styles.editQuantity}>
+          <ChevronUp size={17} />
+          <ChevronDown size={17} />
+        </div>
       </div>
       <div className={styles.buttonCell}>
         <button className={styles.editButton}>
