@@ -1,3 +1,14 @@
+:root {
+  --color-gray100: #f4f4f4;
+  --color-gray200: #ddd;
+  --color-gray300: #717171;
+  --color-blue100: #e1f5fe;
+  --color-blue200: #0070f3;
+  --color-blue300: #3245c3;
+  --color-blue400: #1f364d;
+  --color-red: #d32f2f;
+}
+
 html,
 body {
   max-width: 100vw;
