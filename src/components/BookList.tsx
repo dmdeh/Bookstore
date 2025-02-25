@@ -1,14 +1,14 @@
 import { fetchBooks } from "@/lib/data";
 import styles from "@/styles/BookList.module.css";
-import { Book } from "@/types/type";
-import Link from "next/link";
+import { BookType } from "@/types/type";
+import Book from "./Book";
 
 const tableHeaders = [
   { key: "title", label: "제목" },
   { key: "author", label: "저자" },
   { key: "publisher", label: "출판사" },
   { key: "quantity", label: "수량" },
-  { key: "actions", label: "관리" },
+  { key: "actions", label: "편집" },
 ];
 
 export default async function BookList() {
@@ -28,23 +28,8 @@ export default async function BookList() {
             ))}
           </div>
 
-          {books.map((book: Book) => (
-            <div key={book.isbn} className={styles.row}>
-              <div className={styles.cell}>
-                <Link href={`/books/${book.isbn}`} className={styles.bookTitle}>
-                  {book.title}
-                </Link>
-              </div>
-              <div className={styles.cell}>{book.author}</div>
-              <div className={styles.cell}>{book.publisher}</div>
-              <div className={styles.cell}>
-                <span className={styles.quantity}>{book.quantity}</span>
-              </div>
-              <div className={styles.buttonCell}>
-                <button className={styles.editButton}>수정</button>
-                <button className={styles.deleteButton}>삭제</button>
-              </div>
-            </div>
+          {books.map((book: BookType) => (
+            <Book key={book.isbn} book={book} />
           ))}
         </div>
       )}
