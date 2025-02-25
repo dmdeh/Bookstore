@@ -3,5 +3,7 @@ export interface BookType {
   title: string;
   author: string;
   publisher: string;
-  quantity: number;
+  quantity: string;
 }
+
+export type Fields = keyof BookType;
