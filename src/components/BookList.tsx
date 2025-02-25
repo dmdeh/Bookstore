@@ -1,3 +1,4 @@
+import { fetchBooks } from "@/lib/data";
 import styles from "@/styles/BookList.module.css";
 import { Book } from "@/types/type";
 import Link from "next/link";
@@ -10,9 +11,9 @@ const tableHeaders = [
   { key: "actions", label: "관리" },
 ];
 
-const books: Book[] = [];
+export default async function BookList() {
+  const books = await fetchBooks();
 
-export default function BookList() {
   return (
     <div className={styles.container}>
       {books.length === 0 ? (
@@ -27,7 +28,7 @@ export default function BookList() {
             ))}
           </div>
 
-          {books.map((book) => (
+          {books.map((book: Book) => (
             <div key={book.isbn} className={styles.row}>
               <div className={styles.cell}>
                 <Link href={`/books/${book.isbn}`} className={styles.bookTitle}>
