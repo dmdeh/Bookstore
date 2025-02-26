@@ -8,6 +8,7 @@ import Pagination from "./Pagination";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { TABLE_HEADER } from "@/constants/constants";
+import Pending from "./Pending";
 
 export default function BookList() {
   const searchParams = useSearchParams();
@@ -16,15 +17,19 @@ export default function BookList() {
 
   const [books, setBooks] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
+  const [isPending, setIsPending] = useState(true);
 
   useEffect(() => {
     async function loadBooks() {
+      setIsPending(true);
       try {
         const data = await fetchBooks(currentPage, query);
         setBooks(data.books);
         setTotalPages(data.totalPages);
       } catch (error) {
         console.error("책 목록을 가져오는 중 오류 발생:", error);
+      } finally {
+        setIsPending(false);
       }
     }
 
@@ -33,7 +38,9 @@ export default function BookList() {
 
   return (
     <div className={styles.container}>
-      {books.length === 0 ? (
+      {isPending ? (
+        <Pending />
+      ) : books.length === 0 ? (
         <div className={styles.emptyState}>등록된 도서가 없습니다.</div>
       ) : (
         <div className={styles.table}>
