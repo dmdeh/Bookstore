@@ -2,9 +2,13 @@ import { BookType } from "@/types/type";
 
 const baseUrl = process.env.BASE_URL || "";
 
-export async function fetchBooks() {
+export async function fetchBooks(page = 1, query = "") {
   try {
-    const res = await fetch(`${baseUrl}/api/books`);
+    const url = `${baseUrl}/api/books?page=${page}${
+      query ? `&query=${query}` : ""
+    }`;
+
+    const res = await fetch(url);
 
     if (!res.ok) {
       throw new Error("책 정보를 가져오는데 실패했습니다");
@@ -13,7 +17,7 @@ export async function fetchBooks() {
     return res.json();
   } catch (error) {
     console.error("책 목록을 가져오는 중 오류 발생:", error);
-    return [];
+    return { books: [], totalPages: 0 };
   }
 }
 

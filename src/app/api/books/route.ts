@@ -2,11 +2,33 @@ import { NextResponse, NextRequest } from "next/server";
 import { connectDB } from "@/lib/mongodb";
 import Book from "@/models/Book";
 
-export async function GET() {
+const ITEMS_PER_PAGE = 10;
+
+export async function GET(request: NextRequest) {
   try {
     await connectDB();
-    const books = await Book.find();
-    return NextResponse.json(books);
+
+    const searchParams = request.nextUrl.searchParams;
+    const page = Number(searchParams.get("page")) || 1;
+    const query = searchParams.get("query") || "";
+
+    const filter = query
+      ? {
+          $or: [
+            { title: { $regex: query, $options: "i" } },
+            { author: { $regex: query, $options: "i" } },
+          ],
+        }
+      : {};
+
+    const totalBooks = await Book.countDocuments(filter);
+    const totalPages = Math.ceil(totalBooks / ITEMS_PER_PAGE);
+
+    const books = await Book.find(filter)
+      .skip((page - 1) * ITEMS_PER_PAGE)
+      .limit(ITEMS_PER_PAGE);
+
+    return NextResponse.json({ books, totalPages });
   } catch (error) {
     console.error("Error fetching books:", error);
     return NextResponse.json(

@@ -13,3 +13,11 @@ export const INPUT_FIELDS: InputFieldProps[] = [
     min: 0,
   },
 ];
+
+export const TABLE_HEADER = [
+  { key: "title", label: "제목" },
+  { key: "author", label: "저자" },
+  { key: "publisher", label: "출판사" },
+  { key: "quantity", label: "수량" },
+  { key: "actions", label: "편집" },
+];
