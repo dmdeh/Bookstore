@@ -42,3 +42,20 @@ export async function createBook(bookData: BookType) {
     throw error;
   }
 }
+
+export async function fetchBookDetails(isbn: string) {
+  try {
+    const res = await fetch(`/api/books/${isbn}`);
+
+    if (!res.ok) {
+      throw new Error(
+        `책 상세정보를 불러오는 데 실패했습니다. (status: ${res.status})`
+      );
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error("책 상세 정보를 가져오는 중 오류 발생:", error);
+    throw error;
+  }
+}
