@@ -6,11 +6,19 @@ import { BookType } from "@/types/type";
 import Book from "./Book";
 import Pagination from "./Pagination";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { TABLE_HEADER } from "@/constants/constants";
 import Pending from "./Pending";
 
 export default function BookList() {
+  return (
+    <Suspense fallback={<Pending />}>
+      <BookListInner />
+    </Suspense>
+  );
+}
+
+function BookListInner() {
   const searchParams = useSearchParams();
   const currentPage = Number(searchParams.get("page")) || 1;
   const query = searchParams.get("query") || "";
