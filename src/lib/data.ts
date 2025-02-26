@@ -4,7 +4,7 @@ const baseUrl = process.env.BASE_URL || "";
 
 export async function fetchBooks() {
   try {
-    const res = await fetch(`${baseUrl}/api/book`);
+    const res = await fetch(`${baseUrl}/api/books`);
 
     if (!res.ok) {
       throw new Error("책 정보를 가져오는데 실패했습니다");
@@ -19,7 +19,7 @@ export async function fetchBooks() {
 
 export async function createBook(bookData: BookType) {
   try {
-    const res = await fetch(`${baseUrl}/api/book`, {
+    const res = await fetch(`${baseUrl}/api/books`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
