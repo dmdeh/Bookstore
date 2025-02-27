@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ChevronUp, ChevronDown, Pencil, Trash2 } from "lucide-react";
 import { deleteBook, updateBookQuantity } from "@/lib/data";
 import { useEffect, useState } from "react";
+import useDebounce from "@/hook/useDebounce";
 
 interface BookProps {
   book: BookType;
@@ -23,10 +24,12 @@ export default function Book({ book }: BookProps) {
     });
   };
 
+  const debouncedQuantity = useDebounce(newQuantity, 1000);
+
   useEffect(() => {
     const updateQuantity = async () => {
       try {
-        await updateBookQuantity(isbn, newQuantity);
+        await updateBookQuantity(isbn, debouncedQuantity);
       } catch (error) {
         console.error("책 정보 업데이트 중 오류 발생:", error);
       }
@@ -35,7 +38,7 @@ export default function Book({ book }: BookProps) {
     if (newQuantity !== quantity) {
       updateQuantity();
     }
-  }, [newQuantity, isbn, quantity]);
+  }, [isbn, debouncedQuantity]);
 
   const handleEditBook = (isbn: string) => {
     router.push(`/update/${isbn}`, { scroll: false });
