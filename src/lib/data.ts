@@ -59,3 +59,42 @@ export async function fetchBookDetails(isbn: string) {
     throw error;
   }
 }
+
+export async function updateBook(isbn: string, updatedData: BookType) {
+  try {
+    const res = await fetch(`${baseUrl}/api/books/${isbn}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedData),
+    });
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(errorData.error || "책 수정에 실패했습니다.");
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error("책 수정 중 오류 발생:", error);
+    throw error;
+  }
+}
+
+export async function deleteBook(isbn: string) {
+  try {
+    const res = await fetch(`${baseUrl}/api/books/${isbn}`, {
+      method: "DELETE",
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(errorData.error || "책 삭제에 실패했습니다.");
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error("책 삭제 중 오류 발생:", error);
+    throw error;
+  }
+}
