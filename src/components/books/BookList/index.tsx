@@ -1,14 +1,14 @@
 "use client";
 
 import { fetchBooks } from "@/lib/data";
-import styles from "@/styles/BookList.module.css";
+import styles from "./BookList.module.css";
 import { BookType } from "@/types/type";
-import Book from "./Book";
-import Pagination from "./Pagination";
+import Book from "@/components/books/Book";
+import Pagination from "@/components/ui/Pagination";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import { TABLE_HEADER } from "@/constants/constants";
-import Pending from "./Pending";
+import Pending from "@/components/layout/Pending";
 
 export default function BookList() {
   return (

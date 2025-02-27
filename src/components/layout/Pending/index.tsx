@@ -1,4 +1,4 @@
-import styles from "@/styles/Pending.module.css";
+import styles from "./Pending.module.css";
 
 export default function Pending() {
   return (

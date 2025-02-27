@@ -1,6 +1,6 @@
 import { useRouter } from "next/navigation";
 import { BookType } from "@/types/type";
-import styles from "@/styles/Book.module.css";
+import styles from "./Book.module.css";
 import Link from "next/link";
 import { ChevronUp, ChevronDown, Pencil, Trash2 } from "lucide-react";
 import { deleteBook, updateBookQuantity } from "@/lib/data";

@@ -1,6 +1,6 @@
-import BookList from "@/components/BookList";
-import Header from "@/components/Header";
+import Header from "@/components/layout/Header";
 import styles from "./page.module.css";
+import BookList from "@/components/books/BookList";
 
 export default function Home() {
   return (

@@ -5,9 +5,9 @@ import { useParams, useRouter } from "next/navigation";
 import styles from "@/styles/UpdateBook.module.css";
 import { fetchBookDetails, updateBook } from "@/lib/data";
 import { BookType } from "@/types/type";
-import Modal from "@/components/Modal";
+import Modal from "@/components/ui/Modal";
 import { INPUT_FIELDS } from "@/constants/constants";
-import InputField from "@/components/InputField";
+import InputField from "@/components/ui/InputField";
 
 export default function UpdateBook() {
   const router = useRouter();
