@@ -66,7 +66,13 @@ export default function Book({ book }: BookProps) {
       <div className={styles.cell}>{author}</div>
       <div className={styles.cell}>{publisher}</div>
       <div className={styles.quantityCell}>
-        <span className={styles.quantity}>{newQuantity}</span>
+        <span
+          className={`${styles.quantity} ${
+            +quantity <= 1 ? styles.lowStock : ""
+          }`}
+        >
+          {newQuantity}
+        </span>
         <div className={styles.editQuantity}>
           <ChevronUp size={17} onClick={() => handleEditQuantity("increase")} />
           <ChevronDown
