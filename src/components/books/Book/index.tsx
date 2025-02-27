@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { BookType } from "@/types/type";
 import styles from "./Book.module.css";
 import Link from "next/link";
@@ -13,6 +13,9 @@ interface BookProps {
 
 export default function Book({ book }: BookProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const currentPage = searchParams.get("page") || "1";
+
   const { isbn, title, author, publisher, quantity } = book;
   const [newQuantity, setNewQuantity] = useState(quantity);
 
@@ -41,7 +44,7 @@ export default function Book({ book }: BookProps) {
   }, [isbn, debouncedQuantity]);
 
   const handleEditBook = (isbn: string) => {
-    router.push(`/update/${isbn}`, { scroll: false });
+    router.push(`/update/${isbn}?page=${currentPage}`, { scroll: false });
   };
 
   const handleDeleteBook = async (isbn: string) => {
