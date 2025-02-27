@@ -1,8 +1,7 @@
 import { NextResponse, NextRequest } from "next/server";
 import { connectDB } from "@/lib/mongodb";
 import Book from "@/models/Book";
-
-const ITEMS_PER_PAGE = 10;
+import { ITEMS_PER_PAGE } from "@/constants/constants";
 
 export async function GET(request: NextRequest) {
   try {

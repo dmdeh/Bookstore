@@ -7,6 +7,7 @@
 .buttonCell {
   padding: 12px;
   border-bottom: 1px solid var(--color-gray200);
+  height: 60px;
   align-content: center;
 }
 
@@ -21,8 +22,10 @@
   gap: 5px;
 }
 
-.cell {
-  height: 60px;
+.row:last-child .cell,
+.row:last-child .quantityCell,
+.row:last-child .buttonCell {
+  border-bottom: none;
 }
 
 .editQuantity {
@@ -42,7 +45,6 @@
   text-decoration: none;
   display: inline-block;
   padding: 0.25rem 0;
-  border-bottom: 1px solid transparent;
   width: 250px;
   overflow: hidden;
   text-overflow: ellipsis;

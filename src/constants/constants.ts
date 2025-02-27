@@ -1,5 +1,7 @@
 import { InputFieldProps } from "@/components/ui/InputField";
 
+export const ITEMS_PER_PAGE = 10;
+
 export const INPUT_FIELDS: InputFieldProps[] = [
   { id: "isbn", label: "ISBN", placeholder: "ISBN을 입력하세요" },
   { id: "title", label: "제목", placeholder: "제목을 입력하세요" },
