@@ -13,7 +13,11 @@ export default function Book({ book }: BookProps) {
   return (
     <div key={isbn} className={styles.row}>
       <div className={styles.cell}>
-        <Link href={`/books/${isbn}`} className={styles.bookTitle}>
+        <Link
+          href={`/books/${isbn}`}
+          className={styles.bookTitle}
+          scroll={false}
+        >
           {title}
         </Link>
       </div>

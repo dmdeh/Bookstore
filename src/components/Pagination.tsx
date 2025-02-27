@@ -4,8 +4,18 @@ import { usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import styles from "@/styles/Pagination.module.css";
 import { generatePagination } from "@/utils/generatePagination";
+import { Suspense } from "react";
+import Pending from "./Pending";
 
 export default function Pagination({ totalPages }: { totalPages: number }) {
+  return (
+    <Suspense fallback={<Pending />}>
+      <PaginationInner totalPages={totalPages} />
+    </Suspense>
+  );
+}
+
+function PaginationInner({ totalPages }: { totalPages: number }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const currentPage = Number(searchParams.get("page")) || 1;

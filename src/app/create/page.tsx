@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import styles from "@/styles/Create.module.css";
+import styles from "@/styles/CreateBook.module.css";
 import { createBook } from "@/lib/data";
 import Modal from "@/components/Modal";
 import InputField from "@/components/InputField";
