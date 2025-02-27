@@ -2,14 +2,19 @@ import { NextResponse, NextRequest } from "next/server";
 import { connectDB } from "@/lib/mongodb";
 import Book from "@/models/Book";
 
-export async function GET(
-  request: NextRequest,
-  context: { params: { isbn: string } }
-) {
+export async function GET(request: NextRequest) {
   try {
     await connectDB();
 
-    const { isbn } = context.params;
+    const pathname = request.nextUrl.pathname;
+    const isbn = pathname.split("/").pop();
+
+    if (!isbn) {
+      return NextResponse.json(
+        { message: "잘못된 요청입니다." },
+        { status: 400 }
+      );
+    }
 
     const book = await Book.findOne({ isbn });
 
