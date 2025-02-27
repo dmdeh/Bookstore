@@ -9,6 +9,8 @@
   border-bottom: 1px solid var(--color-gray200);
   height: 60px;
   align-content: center;
+  min-width: 100px;
+  overflow: hidden;
 }
 
 .headerCell {
