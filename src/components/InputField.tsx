@@ -8,6 +8,8 @@ export interface InputFieldProps {
   placeholder: string;
   min?: number;
   required?: boolean;
+  value?: string | number;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function InputField({
@@ -17,6 +19,8 @@ export default function InputField({
   placeholder,
   min,
   required = true,
+  value,
+  onChange,
 }: InputFieldProps) {
   return (
     <div className={styles.inputGroup}>
@@ -31,6 +35,8 @@ export default function InputField({
         placeholder={placeholder}
         min={min}
         required={required}
+        value={value}
+        onChange={onChange}
       />
     </div>
   );
