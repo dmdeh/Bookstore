@@ -3,7 +3,8 @@ import { BookType } from "@/types/type";
 import styles from "@/styles/Book.module.css";
 import Link from "next/link";
 import { ChevronUp, ChevronDown, Pencil, Trash2 } from "lucide-react";
-import { deleteBook } from "@/lib/data";
+import { deleteBook, updateBookQuantity } from "@/lib/data";
+import { useEffect, useState } from "react";
 
 interface BookProps {
   book: BookType;
@@ -12,6 +13,29 @@ interface BookProps {
 export default function Book({ book }: BookProps) {
   const router = useRouter();
   const { isbn, title, author, publisher, quantity } = book;
+  const [newQuantity, setNewQuantity] = useState(quantity);
+
+  const handleEditQuantity = async (operation: "increase" | "decrease") => {
+    setNewQuantity((prevQuantity: string) => {
+      const number = +prevQuantity;
+      const nextQuantity = operation === "increase" ? number + 1 : number - 1;
+      return nextQuantity >= 0 ? nextQuantity.toString() : "0";
+    });
+  };
+
+  useEffect(() => {
+    const updateQuantity = async () => {
+      try {
+        await updateBookQuantity(isbn, newQuantity);
+      } catch (error) {
+        console.error("책 정보 업데이트 중 오류 발생:", error);
+      }
+    };
+
+    if (newQuantity !== quantity) {
+      updateQuantity();
+    }
+  }, [newQuantity, isbn, quantity]);
 
   const handleEditBook = (isbn: string) => {
     router.push(`/update/${isbn}`, { scroll: false });
@@ -39,10 +63,13 @@ export default function Book({ book }: BookProps) {
       <div className={styles.cell}>{author}</div>
       <div className={styles.cell}>{publisher}</div>
       <div className={styles.quantityCell}>
-        <span className={styles.quantity}>{quantity}</span>
+        <span className={styles.quantity}>{newQuantity}</span>
         <div className={styles.editQuantity}>
-          <ChevronUp size={17} />
-          <ChevronDown size={17} />
+          <ChevronUp size={17} onClick={() => handleEditQuantity("increase")} />
+          <ChevronDown
+            size={17}
+            onClick={() => handleEditQuantity("decrease")}
+          />
         </div>
       </div>
       <div className={styles.buttonCell}>
