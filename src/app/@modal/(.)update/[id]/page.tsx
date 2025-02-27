@@ -5,15 +5,16 @@ import { useParams, useRouter } from "next/navigation";
 import styles from "@/styles/UpdateBook.module.css";
 import { fetchBookDetails, updateBook } from "@/lib/data";
 import { BookType } from "@/types/type";
-import Modal from "@/components/Modal";
+import Modal from "@/components/ui/Modal";
 import { INPUT_FIELDS } from "@/constants/constants";
-import InputField from "@/components/InputField";
+import InputField from "@/components/ui/InputField";
+import { useBooks } from "@/context/BookContext";
 
 export default function UpdateBook() {
   const router = useRouter();
   const params = useParams();
   const isbn = Array.isArray(params.id) ? params.id[0] : params.id;
-
+  const { refreshBooks } = useBooks();
   const [book, setBook] = useState<BookType>({
     isbn: "",
     title: "",
@@ -44,6 +45,8 @@ export default function UpdateBook() {
 
   const handleUpdateBook = async () => {
     await updateBook(isbn, book);
+    await refreshBooks();
+
     router.back();
   };
 

@@ -1,10 +1,10 @@
 "use client";
 
-import styles from "@/styles/SearchBox.module.css";
+import styles from "./SearchBox.module.css";
 import { Search } from "lucide-react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { Suspense } from "react";
-import Pending from "./Pending";
+import Pending from "@/components/layout/Pending";
 
 export default function SearchBox({ placeholder }: { placeholder: string }) {
   return (

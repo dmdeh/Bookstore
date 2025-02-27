@@ -3,8 +3,8 @@
 import { useRouter } from "next/navigation";
 import styles from "@/styles/CreateBook.module.css";
 import { createBook } from "@/lib/data";
-import Modal from "@/components/Modal";
-import InputField from "@/components/InputField";
+import Modal from "@/components/ui/Modal";
+import InputField from "@/components/ui/InputField";
 import { INPUT_FIELDS } from "@/constants/constants";
 
 export default function CreateBook() {

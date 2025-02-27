@@ -1,5 +1,5 @@
 import { BookType } from "@/types/type";
-import styles from "@/styles/InputField.module.css";
+import styles from "./InputField.module.css";
 
 export interface InputFieldProps {
   id: keyof BookType;

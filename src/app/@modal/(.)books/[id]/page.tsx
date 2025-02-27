@@ -2,11 +2,11 @@
 
 import { useParams, useRouter } from "next/navigation";
 import styles from "@/styles/BookDetails.module.css";
-import Modal from "@/components/Modal";
+import Modal from "@/components/ui/Modal";
 import { useEffect, useState } from "react";
 import { fetchBookDetails } from "@/lib/data";
 import { BookType } from "@/types/type";
-import Pending from "@/components/Pending";
+import Pending from "@/components/layout/Pending";
 import { X } from "lucide-react";
 
 export default function BookDetails() {

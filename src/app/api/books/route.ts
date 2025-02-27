@@ -1,8 +1,7 @@
 import { NextResponse, NextRequest } from "next/server";
 import { connectDB } from "@/lib/mongodb";
 import Book from "@/models/Book";
-
-const ITEMS_PER_PAGE = 10;
+import { ITEMS_PER_PAGE } from "@/constants/constants";
 
 export async function GET(request: NextRequest) {
   try {
@@ -25,6 +24,7 @@ export async function GET(request: NextRequest) {
     const totalPages = Math.ceil(totalBooks / ITEMS_PER_PAGE);
 
     const books = await Book.find(filter)
+      .sort({ createdAt: -1 })
       .skip((page - 1) * ITEMS_PER_PAGE)
       .limit(ITEMS_PER_PAGE);
 

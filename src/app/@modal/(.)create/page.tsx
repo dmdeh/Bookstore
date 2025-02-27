@@ -3,12 +3,14 @@
 import { useRouter } from "next/navigation";
 import styles from "@/styles/CreateBook.module.css";
 import { createBook } from "@/lib/data";
-import Modal from "@/components/Modal";
-import InputField from "@/components/InputField";
+import Modal from "@/components/ui/Modal";
+import InputField from "@/components/ui/InputField";
 import { INPUT_FIELDS } from "@/constants/constants";
+import { useBooks } from "@/context/BookContext";
 
 export default function CreateBook() {
   const router = useRouter();
+  const { refreshBooks } = useBooks();
 
   const handelSubmitBook = async (formData: FormData) => {
     const isbn = formData.get("isbn")?.toString().trim() ?? "";
@@ -18,9 +20,11 @@ export default function CreateBook() {
     const quantity = formData.get("quantity")?.toString().trim() ?? "";
 
     await createBook({ isbn, title, author, publisher, quantity });
+    await refreshBooks();
 
     router.back();
   };
+
   return (
     <Modal>
       <div className={styles.overlay} onClick={() => router.back()}>

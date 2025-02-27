@@ -1,11 +1,12 @@
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { BookType } from "@/types/type";
-import styles from "@/styles/Book.module.css";
+import styles from "./Book.module.css";
 import Link from "next/link";
 import { ChevronUp, ChevronDown, Pencil, Trash2 } from "lucide-react";
 import { deleteBook, updateBookQuantity } from "@/lib/data";
 import { useEffect, useState } from "react";
 import useDebounce from "@/hook/useDebounce";
+import { useBooks } from "@/context/BookContext";
 
 interface BookProps {
   book: BookType;
@@ -13,8 +14,12 @@ interface BookProps {
 
 export default function Book({ book }: BookProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const currentPage = searchParams.get("page") || "1";
+
   const { isbn, title, author, publisher, quantity } = book;
   const [newQuantity, setNewQuantity] = useState(quantity);
+  const { refreshBooks } = useBooks();
 
   const handleEditQuantity = async (operation: "increase" | "decrease") => {
     setNewQuantity((prevQuantity: string) => {
@@ -41,7 +46,7 @@ export default function Book({ book }: BookProps) {
   }, [isbn, debouncedQuantity]);
 
   const handleEditBook = (isbn: string) => {
-    router.push(`/update/${isbn}`, { scroll: false });
+    router.push(`/update/${isbn}?page=${currentPage}`, { scroll: false });
   };
 
   const handleDeleteBook = async (isbn: string) => {
@@ -49,6 +54,8 @@ export default function Book({ book }: BookProps) {
     if (!isConfirmed) return;
 
     await deleteBook(isbn);
+    await refreshBooks();
+
     router.refresh();
   };
 
@@ -66,7 +73,13 @@ export default function Book({ book }: BookProps) {
       <div className={styles.cell}>{author}</div>
       <div className={styles.cell}>{publisher}</div>
       <div className={styles.quantityCell}>
-        <span className={styles.quantity}>{newQuantity}</span>
+        <span
+          className={`${styles.quantity} ${
+            +quantity <= 1 ? styles.lowStock : ""
+          }`}
+        >
+          {newQuantity}
+        </span>
         <div className={styles.editQuantity}>
           <ChevronUp size={17} onClick={() => handleEditQuantity("increase")} />
           <ChevronDown

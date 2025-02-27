@@ -2,10 +2,10 @@
 
 import { usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import styles from "@/styles/Pagination.module.css";
+import styles from "./Pagination.module.css";
 import { generatePagination } from "@/utils/generatePagination";
 import { Suspense } from "react";
-import Pending from "./Pending";
+import Pending from "@/components/layout/Pending";
 
 export default function Pagination({ totalPages }: { totalPages: number }) {
   return (
