@@ -6,6 +6,7 @@ import { ChevronUp, ChevronDown, Pencil, Trash2 } from "lucide-react";
 import { deleteBook, updateBookQuantity } from "@/lib/data";
 import { useEffect, useState } from "react";
 import useDebounce from "@/hook/useDebounce";
+import { useBooks } from "@/context/BookContext";
 
 interface BookProps {
   book: BookType;
@@ -18,6 +19,7 @@ export default function Book({ book }: BookProps) {
 
   const { isbn, title, author, publisher, quantity } = book;
   const [newQuantity, setNewQuantity] = useState(quantity);
+  const { refreshBooks } = useBooks();
 
   const handleEditQuantity = async (operation: "increase" | "decrease") => {
     setNewQuantity((prevQuantity: string) => {
@@ -52,6 +54,8 @@ export default function Book({ book }: BookProps) {
     if (!isConfirmed) return;
 
     await deleteBook(isbn);
+    await refreshBooks();
+
     router.refresh();
   };
 
