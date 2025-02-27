@@ -4,12 +4,14 @@ import Book from "@/models/Book";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { isbn: string } }
+  context: { params: { isbn: string } }
 ) {
   try {
     await connectDB();
 
-    const book = await Book.findOne({ isbn: params.isbn });
+    const { isbn } = context.params;
+
+    const book = await Book.findOne({ isbn });
 
     if (!book) {
       return NextResponse.json(
