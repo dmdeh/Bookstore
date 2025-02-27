@@ -13,6 +13,10 @@ export default function Book({ book }: BookProps) {
   const router = useRouter();
   const { isbn, title, author, publisher, quantity } = book;
 
+  const handleEditBook = (isbn: string) => {
+    router.push(`/update/${isbn}`, { scroll: false });
+  };
+
   const handleDeleteBook = async (isbn: string) => {
     const isConfirmed = window.confirm("정말로 삭제하시겠습니까?");
     if (!isConfirmed) return;
@@ -42,7 +46,10 @@ export default function Book({ book }: BookProps) {
         </div>
       </div>
       <div className={styles.buttonCell}>
-        <button className={styles.editButton}>
+        <button
+          className={styles.editButton}
+          onClick={() => handleEditBook(isbn)}
+        >
           <Pencil size={18} />
         </button>
         <button
