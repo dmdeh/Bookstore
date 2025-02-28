@@ -31,10 +31,12 @@ npm install
 # 환경변수 추가
 # .env 파일에 추가해주세요
 MONGO_URI=mongodb+srv://Bookstore:connectbookstore@cluster0.jdhkx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+BASE_URL=http://localhost:3000
 
 # 실행
 npm run dev
 ```
+서버가 시작되면 http://localhost:3000 에서 접속할 수 있습니다.
 
 ## 주요 구현 내용
 
