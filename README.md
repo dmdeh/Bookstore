@@ -28,6 +28,10 @@ git clone https://github.com/dmdeh/Bookstore.git
 # 종속성 설치
 npm install
 
+# 환경변수 추가
+# .env 파일에 추가해주세요
+MONGO_URI=mongodb+srv://Bookstore:connectbookstore@cluster0.jdhkx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+
 # 실행
 npm run dev
 ```
